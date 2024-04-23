@@ -6,6 +6,7 @@ import { DifferentExampleTable } from './differentExample.entity';
 import { ExampleModule } from 'Examplepackage';
 import dbConfiguration from 'src/config/database.config';
 import { DataSource } from 'typeorm';
+import { DiscoveryModule } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { DataSource } from 'typeorm';
       [DifferentExampleTable],
       new DataSource(dbConfiguration()),
     ),
+    DiscoveryModule,
   ],
   providers: [DifferentExampleService],
   controllers: [DifferentExampleController],

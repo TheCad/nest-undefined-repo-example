@@ -3,8 +3,9 @@ import { EntityClassOrSchema } from '@nestjs/typeorm/dist/interfaces/entity-clas
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { createExampleProviders } from './example.providers';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ExampleTable } from './example.entity';
 
-@Module({})
+@Module({ imports: [TypeOrmModule.forFeature([ExampleTable])] })
 export class ExampleModule {
   static forFeature(
     entities: EntityClassOrSchema[],
