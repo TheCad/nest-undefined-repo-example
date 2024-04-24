@@ -4,8 +4,13 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import { createExampleProviders } from './example.providers';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ExampleTable } from './example.entity';
+import { ExampleService } from './example.service';
 
-@Module({ imports: [TypeOrmModule.forFeature([ExampleTable])] })
+@Module({
+  imports: [TypeOrmModule.forFeature([ExampleTable])],
+  exports: [TypeOrmModule],
+  providers: [TypeOrmModule, ExampleService],
+})
 export class ExampleModule {
   static forFeature(
     entities: EntityClassOrSchema[],
@@ -15,8 +20,8 @@ export class ExampleModule {
     return {
       imports: [TypeOrmModule.forFeature(entities)],
       module: ExampleModule,
-      providers: providers,
-      exports: providers,
+      providers: [...providers, ExampleService],
+      exports: [...providers, ExampleService],
     };
   }
 }

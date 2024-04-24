@@ -3,6 +3,8 @@ import { differentExampleModule } from './example/differentExample.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import dbConfiguration from './config/database.config';
+import { ExampleModule } from 'Examplepackage';
+import { DevtoolsModule } from '@nestjs/devtools-integration';
 
 @Module({
   imports: [
@@ -16,6 +18,9 @@ import dbConfiguration from './config/database.config';
       useFactory: async (configService: ConfigService) => ({
         ...configService.get('database'),
       }),
+    }),
+    DevtoolsModule.register({
+      http: process.env.NODE_ENV !== 'prodction',
     }),
   ],
   controllers: [],
