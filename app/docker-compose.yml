@@ -1,0 +1,16 @@
+version: '3'
+volumes:
+  data:
+services:
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ExampleRootPassword
+      MYSQL_DATABSE: example
+      MYSQL_USER: ExampleUser
+      MYSQL_PASSWORD: ExampleUserPassword
+    volumes:
+      - data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+    ports:
+      - '3306:3306'
